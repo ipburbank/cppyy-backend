@@ -474,6 +474,58 @@ intptr_t TClingDataMemberInfo::Offset()
    return (intptr_t)-1;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+bool TClingDataMemberInfo::IsBitField() const
+{
+   using namespace clang;
+   if (!IsValid())
+      return false;
+   const ValueDecl *VD = GetTargetValueDecl();
+   if (const FieldDecl *FldD = dyn_cast_or_null<FieldDecl>(VD))
+      return FldD->isBitField();
+   return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+int TClingDataMemberInfo::BitFieldOffset()
+{
+   using namespace clang;
+   if (!IsValid())
+      return -1;
+   const ValueDecl *VD = GetTargetValueDecl();
+   if (const FieldDecl *FldD = dyn_cast_or_null<FieldDecl>(VD)) {
+      if (!FldD->isBitField())
+         return -1;
+      cling::Interpreter::PushTransactionRAII RAII(fInterp);
+      ASTContext &C = FldD->getASTContext();
+      const RecordDecl *RD = FldD->getParent();
+      const ASTRecordLayout &Layout = C.getASTRecordLayout(RD);
+      return (int)Layout.getFieldOffset(FldD->getFieldIndex());
+   }
+   return -1;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+int TClingDataMemberInfo::BitFieldSize() const
+{
+   using namespace clang;
+   if (!IsValid())
+      return -1;
+   const ValueDecl *VD = GetTargetValueDecl();
+   if (const FieldDecl *FldD = dyn_cast_or_null<FieldDecl>(VD)) {
+      if (!FldD->isBitField())
+         return -1;
+      ASTContext &C = FldD->getASTContext();
+      return (int)FldD->getBitWidthValue(C);
+   }
+   return -1;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 long TClingDataMemberInfo::Property() const
 {
    if (!IsValid()) {

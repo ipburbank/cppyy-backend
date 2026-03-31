@@ -273,6 +273,12 @@ namespace Cppyy {
     RPY_EXPORTED
     bool IsEnumData(TCppScope_t scope, TCppIndex_t idata);
     RPY_EXPORTED
+    bool IsDatamemberBitField(TCppScope_t scope, TCppIndex_t idata);
+    RPY_EXPORTED
+    int  GetDatamemberBitFieldOffset(TCppScope_t scope, TCppIndex_t idata);
+    RPY_EXPORTED
+    int  GetDatamemberBitFieldSize(TCppScope_t scope, TCppIndex_t idata);
+    RPY_EXPORTED
     int  GetDimensionSize(TCppScope_t scope, TCppIndex_t idata, int dimension);
 
 // enum properties -----------------------------------------------------------

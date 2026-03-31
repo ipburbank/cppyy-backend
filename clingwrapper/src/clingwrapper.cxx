@@ -2556,6 +2556,42 @@ bool Cppyy::IsEnumData(TCppScope_t scope, TCppIndex_t idata)
     return false;
 }
 
+bool Cppyy::IsDatamemberBitField(TCppScope_t scope, TCppIndex_t idata)
+{
+    if (scope == GLOBAL_HANDLE)
+        return false;
+    TClassRef& cr = type_from_handle(scope);
+    if (cr.GetClass()) {
+        TDataMember* m = (TDataMember*)cr->GetListOfDataMembers()->At((int)idata);
+        return m->IsBitField();
+    }
+    return false;
+}
+
+int Cppyy::GetDatamemberBitFieldOffset(TCppScope_t scope, TCppIndex_t idata)
+{
+    if (scope == GLOBAL_HANDLE)
+        return -1;
+    TClassRef& cr = type_from_handle(scope);
+    if (cr.GetClass()) {
+        TDataMember* m = (TDataMember*)cr->GetListOfDataMembers()->At((int)idata);
+        return m->GetBitFieldOffset();
+    }
+    return -1;
+}
+
+int Cppyy::GetDatamemberBitFieldSize(TCppScope_t scope, TCppIndex_t idata)
+{
+    if (scope == GLOBAL_HANDLE)
+        return -1;
+    TClassRef& cr = type_from_handle(scope);
+    if (cr.GetClass()) {
+        TDataMember* m = (TDataMember*)cr->GetListOfDataMembers()->At((int)idata);
+        return m->GetBitFieldSize();
+    }
+    return -1;
+}
+
 int Cppyy::GetDimensionSize(TCppScope_t scope, TCppIndex_t idata, int dimension)
 {
     if (scope == GLOBAL_HANDLE) {
@@ -3116,6 +3152,18 @@ int cppyy_is_const_data(cppyy_scope_t scope, cppyy_index_t idata) {
 
 int cppyy_is_enum_data(cppyy_scope_t scope, cppyy_index_t idata) {
     return (int)Cppyy::IsEnumData(scope, idata);
+}
+
+int cppyy_is_bitfield_data(cppyy_scope_t scope, cppyy_index_t idata) {
+    return (int)Cppyy::IsDatamemberBitField(scope, idata);
+}
+
+int cppyy_datamember_bitfield_offset(cppyy_scope_t scope, cppyy_index_t idata) {
+    return Cppyy::GetDatamemberBitFieldOffset(scope, idata);
+}
+
+int cppyy_datamember_bitfield_size(cppyy_scope_t scope, cppyy_index_t idata) {
+    return Cppyy::GetDatamemberBitFieldSize(scope, idata);
 }
 
 int cppyy_get_dimension_size(cppyy_scope_t scope, cppyy_index_t idata, int dimension) {

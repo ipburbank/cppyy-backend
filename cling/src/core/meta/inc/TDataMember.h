@@ -79,6 +79,9 @@ public:
    TList         *GetOptions() const;
 
    Bool_t         IsBasic() const;
+   Bool_t         IsBitField() const;
+   Int_t          GetBitFieldOffset() const;
+   Int_t          GetBitFieldSize() const;
    Bool_t         IsEnum() const;
    Bool_t         IsaPointer() const;
    Bool_t         IsPersistent() const { return TestBit(kObjIsPersistent); }

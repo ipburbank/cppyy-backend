@@ -419,6 +419,9 @@ public: // Public Interface
    virtual int    DataMemberInfo_MaxIndex(DataMemberInfo_t* dminfo, Int_t dim) const;
    virtual int    DataMemberInfo_Next(DataMemberInfo_t* dminfo) const;
    virtual intptr_t DataMemberInfo_Offset(DataMemberInfo_t* dminfo) const;
+   virtual Bool_t DataMemberInfo_IsBitField(DataMemberInfo_t* dminfo) const;
+   virtual int    DataMemberInfo_BitFieldOffset(DataMemberInfo_t* dminfo) const;
+   virtual int    DataMemberInfo_BitFieldSize(DataMemberInfo_t* dminfo) const;
    virtual Long_t DataMemberInfo_Property(DataMemberInfo_t* dminfo) const;
    virtual Long_t DataMemberInfo_TypeProperty(DataMemberInfo_t* dminfo) const;
    virtual int    DataMemberInfo_TypeSize(DataMemberInfo_t* dminfo) const;

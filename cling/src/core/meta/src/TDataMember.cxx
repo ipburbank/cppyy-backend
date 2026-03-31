@@ -577,6 +577,38 @@ Bool_t TDataMember::IsBasic() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+/// Return true if data member is a bitfield.
+
+Bool_t TDataMember::IsBitField() const
+{
+   if (fInfo)
+      return gCling->DataMemberInfo_IsBitField(fInfo);
+   return kFALSE;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Get bit offset within the immediate parent record (in bits).
+/// Returns -1 if not a bitfield.
+
+Int_t TDataMember::GetBitFieldOffset() const
+{
+   if (fInfo)
+      return gCling->DataMemberInfo_BitFieldOffset(fInfo);
+   return -1;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Get bit width of the bitfield.
+/// Returns -1 if not a bitfield.
+
+Int_t TDataMember::GetBitFieldSize() const
+{
+   if (fInfo)
+      return gCling->DataMemberInfo_BitFieldSize(fInfo);
+   return -1;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 /// Return true if data member is an enum.
 
 Bool_t TDataMember::IsEnum() const

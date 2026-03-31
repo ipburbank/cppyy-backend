@@ -258,6 +258,12 @@ extern "C" {
     RPY_EXPORTED
     int cppyy_is_enum_data(cppyy_scope_t scope, cppyy_index_t idata);
     RPY_EXPORTED
+    int cppyy_is_bitfield_data(cppyy_scope_t scope, cppyy_index_t idata);
+    RPY_EXPORTED
+    int cppyy_datamember_bitfield_offset(cppyy_scope_t scope, cppyy_index_t idata);
+    RPY_EXPORTED
+    int cppyy_datamember_bitfield_size(cppyy_scope_t scope, cppyy_index_t idata);
+    RPY_EXPORTED
     int cppyy_get_dimension_size(cppyy_scope_t scope, cppyy_index_t idata, int dimension);
 
     /* enum properties -------------------------------------------------------- */

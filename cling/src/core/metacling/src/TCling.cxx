@@ -7624,6 +7624,30 @@ intptr_t TCling::DataMemberInfo_Offset(DataMemberInfo_t* dminfo) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
+Bool_t TCling::DataMemberInfo_IsBitField(DataMemberInfo_t* dminfo) const
+{
+   TClingDataMemberInfo* TClinginfo = (TClingDataMemberInfo*) dminfo;
+   return TClinginfo->IsBitField();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+int TCling::DataMemberInfo_BitFieldOffset(DataMemberInfo_t* dminfo) const
+{
+   TClingDataMemberInfo* TClinginfo = (TClingDataMemberInfo*) dminfo;
+   return TClinginfo->BitFieldOffset();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+int TCling::DataMemberInfo_BitFieldSize(DataMemberInfo_t* dminfo) const
+{
+   TClingDataMemberInfo* TClinginfo = (TClingDataMemberInfo*) dminfo;
+   return TClinginfo->BitFieldSize();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 Long_t TCling::DataMemberInfo_Property(DataMemberInfo_t* dminfo) const
 {
    TClingDataMemberInfo* TClinginfo = (TClingDataMemberInfo*) dminfo;

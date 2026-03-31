@@ -370,6 +370,9 @@ public:
    virtual int    DataMemberInfo_MaxIndex(DataMemberInfo_t * /* dminfo */, Int_t  /* dim */) const {return 0;}
    virtual int    DataMemberInfo_Next(DataMemberInfo_t * /* dminfo */) const {return 0;}
    virtual intptr_t DataMemberInfo_Offset(DataMemberInfo_t * /* dminfo */) const {return 0;}
+   virtual Bool_t DataMemberInfo_IsBitField(DataMemberInfo_t * /* dminfo */) const {return false;}
+   virtual int    DataMemberInfo_BitFieldOffset(DataMemberInfo_t * /* dminfo */) const {return -1;}
+   virtual int    DataMemberInfo_BitFieldSize(DataMemberInfo_t * /* dminfo */) const {return -1;}
    virtual Long_t DataMemberInfo_Property(DataMemberInfo_t * /* dminfo */) const {return 0;}
    virtual Long_t DataMemberInfo_TypeProperty(DataMemberInfo_t * /* dminfo */) const {return 0;}
    virtual int    DataMemberInfo_TypeSize(DataMemberInfo_t * /* dminfo */) const {return 0;}

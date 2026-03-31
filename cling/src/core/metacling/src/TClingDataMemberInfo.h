@@ -133,6 +133,9 @@ public:
    int                InternalNext();
    bool               Next() { return InternalNext(); }
    intptr_t           Offset();
+   bool               IsBitField() const;
+   int                BitFieldOffset();
+   int                BitFieldSize() const;
    long               Property() const;
    long               TypeProperty() const;
    int                TypeSize() const;
